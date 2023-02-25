@@ -1,3 +1,4 @@
+import { BoardStatusValidation } from './pipe/board-status-validation.pipe';
 import { BoardsService } from './boards.service';
 import {
   Body,
@@ -41,7 +42,7 @@ export class BoardsController {
   @Put(':id/status')
   updateBoardStatus(
     @Param('id') id: string,
-    @Body('status') status: BoardStatus,
+    @Body('status', BoardStatusValidation) status: BoardStatus,
   ): Board {
     return this.boardsService.updateBoardStatus(id, status);
   }
