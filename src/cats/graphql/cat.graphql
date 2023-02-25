@@ -1,0 +1,10 @@
+type Cat {
+  id: String!
+  name: String!
+  age: String!
+  bread: String!
+}
+
+type Query {
+  listCats: [Cat]
+}
