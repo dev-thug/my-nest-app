@@ -10,18 +10,23 @@ import {
   UnauthorizedException,
 } from '@nestjs/common/exceptions';
 import * as bcrypt from 'bcryptjs';
+import { JwtService } from '@nestjs/jwt/dist';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(Auth) private authRepository: Repository<Auth>,
+    private jwtService: JwtService,
   ) {}
 
   async signIn(createAuthDto: CreateAuthDto) {
     const { email, password } = createAuthDto;
     const user = await this.authRepository.findOneBy({ email });
     if (user && (await bcrypt.compare(password, user.password))) {
-      return 'login success';
+      const payload = { email: user.email };
+
+      const accessToken = await this.jwtService.sign(payload);
+      return { accessToken };
     } else {
       throw new UnauthorizedException('login failed');
     }
@@ -52,6 +57,9 @@ export class AuthService {
   async findAll() {
     return await this.authRepository.find();
     // return `This action returns all auth`;
+  }
+  async findOneByEmail(email: string) {
+    return await this.authRepository.findOneByOrFail({ email });
   }
 
   findOne(id: number) {
