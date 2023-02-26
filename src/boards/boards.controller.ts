@@ -7,6 +7,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Post,
   Put,
@@ -23,10 +24,13 @@ import { GetUser } from 'src/auth/get-user.decorator';
 @Controller('boards')
 @UseGuards(AuthGuard())
 export class BoardsController {
+  private logger = new Logger('BoardsController');
+
   constructor(private boardsService: BoardsService) {}
 
   @Get()
   getAllBoard(@GetUser() user: Auth): Promise<Board[]> {
+    this.logger.verbose(`User: ${user.email} trying to get all boards`);
     return this.boardsService.getAllBoards(user);
   }
 
