@@ -1,3 +1,4 @@
+import { Auth } from './../auth/entities/auth.entity';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Board } from 'src/boards/board.entity';
 
@@ -9,6 +10,6 @@ export const typeORMConfig: TypeOrmModuleOptions = {
   password: 'postgres',
   database: 'board-app',
   // entities: [__dirname + '/../**/*.entity.{js,ts}'],
-  entities: [Board],
+  entities: [Board, Auth],
   synchronize: true,
 };
