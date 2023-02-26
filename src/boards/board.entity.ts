@@ -1,5 +1,12 @@
 import { BoardStatus } from './board-status.enum';
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Auth } from 'src/auth/entities/auth.entity';
 @Entity()
 export class Board {
   @PrimaryGeneratedColumn()
@@ -13,4 +20,7 @@ export class Board {
 
   @Column({ default: BoardStatus.PUBLIC })
   status: BoardStatus;
+
+  @ManyToOne((type) => Auth, (user) => user.boards, { eager: false })
+  user: Auth;
 }
