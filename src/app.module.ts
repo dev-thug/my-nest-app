@@ -13,7 +13,7 @@ import { TodoModule } from './todo/todo.module';
     TypeOrmModule.forRoot(typeORMConfig),
     AuthModule,
     MongooseModule.forRoot(
-      'mongodb+srv://de0978:QxaWdAax9eGLDE5J@cluster0.sablhsh.mongodb.net/?retryWrites=true&w=majority',
+      'mongodb+srv://de0978:QxaWdAax9eGLDE5J@cluster0.sablhsh.mongodb.net/nest',
     ),
     TodoModule,
   ],
