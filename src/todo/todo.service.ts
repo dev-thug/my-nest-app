@@ -11,14 +11,15 @@ export class TodoService {
     @InjectModel(Todo.name) private readonly todoModel: Model<TodoDocument>,
   ) {}
 
-  create(createTodoInput: CreateTodoInput) {
+  async create(createTodoInput: CreateTodoInput) {
     const createdTodo = new this.todoModel(createTodoInput);
-    return createdTodo.save();
+    return await createdTodo.save();
     // return 'This action adds a new todo';
   }
 
-  findAll() {
-    return `This action returns all todo`;
+  async findAll() {
+    return await this.todoModel.find().exec();
+    // return `This action returns all todo`;
   }
 
   findOne(id: number) {

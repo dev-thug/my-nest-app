@@ -8,13 +8,18 @@ export class TodoResolver {
   constructor(private readonly todoService: TodoService) {}
 
   @Mutation('createTodo')
-  create(@Args('createTodoInput') createTodoInput: CreateTodoInput) {
-    return this.todoService.create(createTodoInput);
+  // async create(@Args('createTodoInput') createTodoInput: CreateTodoInput) {
+  async create(
+    @Args('title') title: string,
+    @Args('description') description: string,
+  ) {
+    const createTodoInput = { title, description };
+    return await this.todoService.create(createTodoInput);
   }
 
-  @Query('todo')
-  findAll() {
-    return this.todoService.findAll();
+  @Query('listTodo')
+  async findAll() {
+    return await this.todoService.findAll();
   }
 
   @Query('todo')

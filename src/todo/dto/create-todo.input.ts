@@ -1,1 +1,4 @@
-export class CreateTodoInput {}
+export class CreateTodoInput {
+  title: string;
+  description: string;
+}
