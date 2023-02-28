@@ -23,17 +23,17 @@ export class TodoResolver {
   }
 
   @Query('todo')
-  findOne(@Args('id') id: number) {
+  findOne(@Args('id') id: string) {
     return this.todoService.findOne(id);
   }
 
   @Mutation('updateTodo')
-  update(@Args('updateTodoInput') updateTodoInput: UpdateTodoInput) {
-    return this.todoService.update(updateTodoInput.id, updateTodoInput);
+  async update(@Args('updateTodoInput') updateTodoInput: UpdateTodoInput) {
+    return await this.todoService.update(updateTodoInput.id, updateTodoInput);
   }
 
   @Mutation('removeTodo')
-  remove(@Args('id') id: number) {
-    return this.todoService.remove(id);
+  async remove(@Args('id') id: string) {
+    return await this.todoService.remove(id);
   }
 }

@@ -9,13 +9,13 @@
 /* eslint-disable */
 
 export interface CreateTodoInput {
-    id?: Nullable<number>;
+    id?: Nullable<string>;
     title?: Nullable<string>;
     description?: Nullable<string>;
 }
 
 export interface UpdateTodoInput {
-    id?: Nullable<number>;
+    id?: Nullable<string>;
     title?: Nullable<string>;
     description?: Nullable<string>;
 }
@@ -28,13 +28,13 @@ export interface Todo {
 
 export interface IQuery {
     listTodo(): Nullable<Todo>[] | Promise<Nullable<Todo>[]>;
-    todo(id: number): Nullable<Todo> | Promise<Nullable<Todo>>;
+    todo(id: string): Nullable<Todo> | Promise<Nullable<Todo>>;
 }
 
 export interface IMutation {
     createTodo(title?: Nullable<string>, description?: Nullable<string>): Todo | Promise<Todo>;
     updateTodo(updateTodoInput: UpdateTodoInput): Todo | Promise<Todo>;
-    removeTodo(id: number): Nullable<Todo> | Promise<Nullable<Todo>>;
+    removeTodo(id: string): Nullable<Todo> | Promise<Nullable<Todo>>;
 }
 
 type Nullable<T> = T | null;

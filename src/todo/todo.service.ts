@@ -22,15 +22,22 @@ export class TodoService {
     // return `This action returns all todo`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} todo`;
+  async findOne(id: string) {
+    return await this.todoModel.findById(id);
+    // return `This action returns a #${id} todo`;
   }
 
-  update(id: number, updateTodoInput: UpdateTodoInput) {
-    return `This action updates a #${id} todo`;
+  async update(id: string, updateTodoInput: UpdateTodoInput) {
+    console.log(`This action updates a #${id} todo`);
+
+    return await this.todoModel.findOneAndUpdate({ id }, updateTodoInput, {
+      new: true,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} todo`;
+  async remove(id: string) {
+    console.log(`This action removes a #${id} todo`);
+    const deletedTodo = await this.todoModel.deleteOne({ id });
+    return !!deletedTodo;
   }
 }
